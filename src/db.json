@@ -93,6 +93,13 @@
       "noOfTickets": 3,
       "dateOfJourney": "2024-02-29",
       "id": 1008
+    },
+    {
+      "airlinesId": "IND-101",
+      "customerName": " prashant",
+      "noOfTickets": 2,
+      "dateOfJourney": "2024-03-12",
+      "id": 1009
     }
   ]
 }
