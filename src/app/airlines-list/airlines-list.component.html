@@ -1,0 +1,55 @@
+<h2 class="textStyle text-center">Welcome to Infy Airlines</h2>
+
+<div class="row" *ngIf="airlinesArray?.length">
+    <!-- Iterate over the airlinesArray to render the cards for all the airlines -->
+    <div class="col-md-3 mt-3" id="airlineCard" *ngFor="let airlines of airlinesArray">
+        <div class="card shadow" style="opacity: 0.8;">
+            <!-- 
+                modify the img tag to display the image using the airlines property 
+                of all the airlines and set the alternate text as the airlines id 
+            -->
+            <img id="airlineImage" src="{{airlines.airlinesImage}}" alt="{{airlines.id}}" height="200px"
+                class="card-img-top">
+            <div class="card-body text text-center">
+                <h6 id="cardTitle">
+                    <!-- display the airlines name and airlines id as shown in the screenshots -->
+                    {{airlines.airlinesName}} | {{airlines.id}}
+                </h6>
+                <div class="cardData">
+
+                    <h6 id="fare">
+                        <p> Flying From : {{airlines.source}} </p>
+                        <p> Flying To : {{airlines.destination}} </p>
+                        <p> Fare: {{airlines.fare  | currency :'USD'}} </p>
+                        <!-- display the airlines fare with proper currency symbol -->
+                    </h6>
+                </div>
+                <!-- 
+                    1. If the airlines is Cancelled, the button should be disabled, 
+                    2. Invoke the showBookingForm method with proper airlines id value  *ngIf="airlines.status == 'Cancelled'
+                -->
+                <div *ngIf="airlines.status == 'Cancelled';then r else c">here is ignored</div>
+                <ng-template #c>
+                    <button class="btn btn-outline-dark btn-sm" id="bookTicket" (click)="showBookingForm(airlines)">
+                        Book Ticket
+                    </button>
+                </ng-template>
+
+                <ng-template #r>
+                    <button class="btn btn-outline-dark btn-sm" id="bookTicket" disabled >
+                        Book Ticket
+                    </button>
+                </ng-template>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!airlinesArray?.length">
+    <h1 class="text text-center" id="errorMessage">
+        <!-- display the error message here -->
+        {{errorMessage}}
+    </h1>
+</div>
